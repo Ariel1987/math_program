@@ -44,6 +44,7 @@ int choices() {
 	printf("8 - Factorial\n");
 	printf("9 - Multiple numbers\n");
 	printf("10 - Triangular numbers\n");
+	printf("11 - Exit\n");
 	printf("Option: ");
 
 	int option;
@@ -97,6 +98,10 @@ int startProgram() {
 		isNumTriangular();
 		choices();
 		break;
+	case 11:
+		printf("\nThat's it for today!\n");
+		exit(0);
+		break;
 	default:
 		printf("\nInexistent option\n\n");
 		choices();
@@ -108,9 +113,10 @@ int startProgram() {
 
 int secondaryMenu(int (*function)()) {
 
-	printf("Would you like to continue with this operation?");
+	printf("\n\nWould you like to continue with this operation?");
 	printf("\n1 - Yes");
 	printf("\n2 - No");
+	printf("\n3 - Exit");
 	printf("\nOption: ");
 
 	int option;
@@ -123,9 +129,13 @@ int secondaryMenu(int (*function)()) {
 	case 2:
 		startProgram();
 		break;
+	case 3:
+		printf("\nThat's it for today!\n");
+		exit(0);
+		break;
 	default:
 		printf("\nInexistent option\n\n");
-		secondaryMenu(function);
+		startProgram();
 	}
 
 	return 0;
@@ -241,6 +251,8 @@ int bestSell() {
 
 int grades() {
 
+	printf("\n---------- Best grade in class ----------\n");
+
 	int students = 0, i;
 	float grades[students];
 
@@ -270,6 +282,8 @@ int grades() {
 
 int sumOfEvens() {
 
+	printf("\n---------- Sum of even numbers ----------\n");
+
 	int sizeOfArray = 0, sequence[sizeOfArray];
 
 	printf("\nEnter number of integers you would like to put in sequence: ");
@@ -295,6 +309,8 @@ int sumOfEvens() {
 
 int factorial() {
 
+	printf("\n---------- Factorial ----------\n");
+
 	int number, factorial = 1;
 	printf("\nEnter a number to find its factorial: ");
 	scanf("%d", &number);
@@ -311,13 +327,20 @@ int factorial() {
 
 int multiplesOfTwoNumbers() {
 
-	int n, num1, num2;
-	printf("\nEnter three positive numbers: ");
-	scanf("%d %d %d", &n, &num1, &num2);
+	printf("\n---------- N numbers multiples of X and Y ----------\n");
 
+	int n, x, y;
+	printf("\nEnter a positive number for n: ");
+	scanf("%d", &n);
+	printf("\nEnter a positive number for x: ");
+	scanf("%d", &x);
+	printf("\nEnter a positive number for y: ");
+	scanf("%d", &y);
+
+	printf("\nThe %d numbers that are multiples of %d and/or %d are ", n, x, y);
 	int result = 0;
 	for (int i = 0; i < n; i++) {
-		if (result % num1 == 0 || result % num2 == 0) {
+		if (result % x == 0 || result % y == 0) {
 			printf("%d ", result);
 		} else {
 			i--;
@@ -331,6 +354,8 @@ int multiplesOfTwoNumbers() {
 }
 
 int isNumTriangular() {
+
+	printf("\n---------- Find out if a number is multiplied by three consecutive numbers ----------\n");
 
 	int num, i;
 	printf("\nEnter a positive integer: ");
