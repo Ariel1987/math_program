@@ -13,7 +13,7 @@
 
 int startProgram();
 int choices();
-int secondaryMenu();
+int secondaryMenu(int (*f)(int));
 int square();
 int sum();
 int oddNums();
@@ -106,7 +106,7 @@ int startProgram() {
 	return 0;
 }
 
-int secondaryMenu() {
+int secondaryMenu(int (*function)()) {
 
 	printf("Would you like to continue with this operation?");
 	printf("\n1 - Yes");
@@ -116,7 +116,19 @@ int secondaryMenu() {
 	int option;
 	scanf("%d", &option);
 
-	return option;
+	switch(option) {
+	case 1:
+		function();
+		break;
+	case 2:
+		startProgram();
+		break;
+	default:
+		printf("\nInexistent option\n\n");
+		secondaryMenu(function);
+	}
+
+	return 0;
 }
 
 int square() {
@@ -128,47 +140,38 @@ int square() {
 	printf("\nEnter a positive number: ");
 	scanf("%d", &number);
 
-	if(number == 0) {
-		squareOfNum = 0;
-	} else {
-		squareOfNum = number * number;
-	}
+	squareOfNum = number * number;
+
 	printf("\nThe square of %d is %d\n\n", number, squareOfNum);
 
-	int option = secondaryMenu();
-
-	switch(option) {
-	case 1:
-		square();
-		break;
-	case 2:
-		startProgram();
-		break;
-	default:
-		printf("Inexistent option");
-		secondaryMenu();
-	}
+	secondaryMenu(square);
 
 	return 0;
 }
 
 int sum() {
 
-	int number,
-		sum = 0;
+	printf("\n---------- Sum of first n positive numbers ----------\n");
 
-	printf("\nEnter a positive number to know the sum of its first positive numbers: ");
+	int number,
+		sumOfNums = 0;
+
+	printf("\nEnter a positive number to know the sum of its former numbers: ");
 	scanf("%d", &number);
 
 	for (int i = 0; i <= number; i++) {
-		sum += i;
+		sumOfNums += i;
 	}
-	printf("\nThe sum of the first %d positive numbers is %d\n", number, sum);
+	printf("\nThe sum of the first %d positive numbers is %d\n", number, sumOfNums);
+
+	secondaryMenu(sum);
 
 	return 0;
 }
 
 int oddNums() {
+
+	printf("\n---------- Find the first n odd numbers ----------\n");
 
 	int number,
 		odds = 1;
@@ -182,10 +185,14 @@ int oddNums() {
 		odds = odds + 2;
 	}
 
+	secondaryMenu(oddNums);
+
 	return 0;
 }
 
 int power() {
+
+	printf("\n---------- N to the power of X ----------\n");
 
 	int number,
 		power,
@@ -199,10 +206,14 @@ int power() {
 	}
 	printf("%d ", result);
 
+	secondaryMenu(power);
+
 	return 0;
 }
 
 int bestSell() {
+
+	printf("\n---------- Best sale of the month ----------\n");
 
 	int march = 31;
 	int sales[march];
@@ -222,6 +233,8 @@ int bestSell() {
 		}
 	}
 	printf("The best sell was on %d of March of %d dollars\n", day, bestSell);
+
+	secondaryMenu(bestSell);
 
 	return 0;
 }
@@ -250,6 +263,8 @@ int grades() {
 	printf("\nLowest grade is %f: ", lowestGrade);
 	printf("\nHighest grade is %f: ", highestGrade);
 
+	secondaryMenu(grades);
+
 	return 0;
 }
 
@@ -273,6 +288,8 @@ int sumOfEvens() {
 	}
 	printf("\nThe sum of the even numbers you entered is %d", sum);
 
+	secondaryMenu(sumOfEvens);
+
 	return 0;
 }
 
@@ -286,6 +303,8 @@ int factorial() {
 		factorial = factorial * (number - i);
 	}
 	printf("\nThe factorial of %d is %d", number, factorial);
+
+	secondaryMenu(factorial);
 
 	return 0;
 }
@@ -303,9 +322,10 @@ int multiplesOfTwoNumbers() {
 		} else {
 			i--;
 		}
-
 		result++;
 	}
+
+	secondaryMenu(multiplesOfTwoNumbers);
 
 	return 0;
 }
@@ -322,6 +342,8 @@ int isNumTriangular() {
 	} else {
 		printf("\n%d is not a triangular number", num);
 	}
+
+	secondaryMenu(isNumTriangular);
 
 	return 0;
 }
