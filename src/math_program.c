@@ -13,6 +13,7 @@
 
 int startProgram();
 int choices();
+int secondaryMenu();
 int square();
 int sum();
 int oddNums();
@@ -25,9 +26,7 @@ int multiplesOfTwoNumbers();
 int isNumTriangular();
 
 int main(void) {
-
 	startProgram();
-
 	return 0;
 }
 
@@ -60,33 +59,43 @@ int startProgram() {
 	switch(option) {
 	case 1:
 		square();
+		choices();
 		break;
 	case 2:
 		sum();
+		choices();
 		break;
 	case 3:
 		oddNums();
+		choices();
 		break;
 	case 4:
 		power();
+		choices();
 		break;
 	case 5:
 		bestSell();
+		choices();
 		break;
 	case 6:
 		grades();
+		choices();
 		break;
 	case 7:
 		sumOfEvens();
+		choices();
 		break;
 	case 8:
 		factorial();
+		choices();
 		break;
 	case 9:
 		multiplesOfTwoNumbers();
+		choices();
 		break;
 	case 10:
 		isNumTriangular();
+		choices();
 		break;
 	default:
 		printf("\nInexistent option\n\n");
@@ -97,21 +106,48 @@ int startProgram() {
 	return 0;
 }
 
+int secondaryMenu() {
+
+	printf("Would you like to continue with this operation?");
+	printf("\n1 - Yes");
+	printf("\n2 - No");
+	printf("\nOption: ");
+
+	int option;
+	scanf("%d", &option);
+
+	return option;
+}
+
 int square() {
 
+	printf("\n---------- Find out the square ----------\n");
 	int number,
-		square;
+		squareOfNum;
 
-	printf("Enter a positive number to know its square: ");
+	printf("\nEnter a positive number: ");
 	scanf("%d", &number);
 
 	if(number == 0) {
-		square = 0;
+		squareOfNum = 0;
 	} else {
-		square = number * number;
+		squareOfNum = number * number;
 	}
-	printf("\nThe square of %d is %d\n", number, square);
+	printf("\nThe square of %d is %d\n\n", number, squareOfNum);
 
+	int option = secondaryMenu();
+
+	switch(option) {
+	case 1:
+		square();
+		break;
+	case 2:
+		startProgram();
+		break;
+	default:
+		printf("Inexistent option");
+		secondaryMenu();
+	}
 
 	return 0;
 }
